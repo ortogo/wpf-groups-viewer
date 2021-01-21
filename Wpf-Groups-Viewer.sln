@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wpf-Groups-Viewer", "Wpf-Groups-Viewer\Wpf-Groups-Viewer.csproj", "{27093E1F-E27B-4495-944A-369ECAD069DD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27093E1F-E27B-4495-944A-369ECAD069DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27093E1F-E27B-4495-944A-369ECAD069DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27093E1F-E27B-4495-944A-369ECAD069DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27093E1F-E27B-4495-944A-369ECAD069DD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A485DC92-29C7-480A-90BF-909587F3F759}
+	EndGlobalSection
+EndGlobal

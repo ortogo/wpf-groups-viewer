@@ -1,0 +1,40 @@
+﻿<Window x:Class="WpfGroupsViewer.UI.Views.GroupsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:properties="clr-namespace:WpfGroupsViewer.Properties"
+        mc:Ignorable="d"
+        Title="GroupsView" Height="450" Width="800">
+    <Grid>
+        <!-- The groups list -->
+        <ListBox
+            ItemsSource="{Binding GroupsItems}">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <Expander Header="{Binding Name}">
+                        <Grid>
+                            <StackPanel>
+                                <TextBlock>
+                                    <Run Text="{x:Static properties:StringsEN.NumberString}" />
+                                    <Run Text=": " />
+                                    <Run Text="{Binding Number}" />
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="{x:Static properties:StringsEN.GroupString}" />
+                                    <Run Text=": " />
+                                    <Run Text="{Binding Name}" />
+                                </TextBlock>
+                                <TextBlock>
+                                    <Run Text="{x:Static properties:StringsEN.PathToDetailsFileString}" />
+                                    <Run Text=": " />
+                                    <Run Text="{Binding DetailsFilePath, Mode=OneWay}" />
+                                </TextBlock>
+                            </StackPanel>
+                        </Grid>
+                    </Expander>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+</Window>
