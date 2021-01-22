@@ -7,5 +7,6 @@
     <system:String x:Key="LocationString">Datails location</system:String>
     <system:String x:Key="NumberString">Number</system:String>
     <system:String x:Key="PathToDetailsFileString">Path to details file</system:String>
+    <system:String x:Key="MousePointerIsOnGroupString">Mouse pointer is on group</system:String>
 
 </ResourceDictionary>

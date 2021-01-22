@@ -79,6 +79,7 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="Helpers\AssemblyHelper.cs" />
+    <Compile Include="UI\AttachedProperties\ExpanderMouseEnterAttachedProperty.cs" />
     <Compile Include="UI\Behaviours\ExpanderDoubleClickBehaviour.cs" />
     <Compile Include="UI\Commands\SimpleCommand.cs" />
     <Compile Include="UI\Models\GroupModel.cs" />

@@ -1,7 +1,10 @@
 ﻿using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 using WpfGroupsViewer.UI.Commands;
@@ -9,7 +12,7 @@ using WpfGroupsViewer.UI.Models;
 
 namespace WpfGroupsViewer.UI.ViewModels
 {
-    public class GroupsViewModel
+    public class GroupsViewModel : INotifyPropertyChanged
     {
         #region Properties
 
@@ -18,7 +21,35 @@ namespace WpfGroupsViewer.UI.ViewModels
         /// </summary>
         public ObservableCollection<GroupModel> GroupsItems { get; set; }
 
+        public Visibility MousePointerIsOnGroupTextBlockVisibility
+        {
+            get => mousePointerIsOnGroupTextBlockVisibility;
+            set
+            {
+                mousePointerIsOnGroupTextBlockVisibility = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string MousePointerIsOnGroupName 
+        {
+            get => mousePointerIsOnGroupName;
+            set
+            {
+                mousePointerIsOnGroupName = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public ICommand OpenGroupDetailsCommand => new SimpleCommand<GroupModel>(OpenGroupDetailsCommandHandler);
+
+        public ICommand MouseEnterCommand => new SimpleCommand<GroupModel>(MouseEnterCommandHandler);
+        public ICommand MouseLeaveCommand => new SimpleCommand<GroupModel>(MouseLeaveCommandHandler);
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private string mousePointerIsOnGroupName;
+        private Visibility mousePointerIsOnGroupTextBlockVisibility = Visibility.Collapsed;
 
         #endregion
 
@@ -53,6 +84,23 @@ namespace WpfGroupsViewer.UI.ViewModels
             }
 
             Process.Start(groupModel.DetailsFilePath);
+        }
+
+        private void MouseEnterCommandHandler(GroupModel e)
+        {
+            MousePointerIsOnGroupName = e.Name;
+            MousePointerIsOnGroupTextBlockVisibility = Visibility.Visible;
+        }
+
+        private void MouseLeaveCommandHandler(GroupModel e)
+        {
+            MousePointerIsOnGroupName = string.Empty;
+            MousePointerIsOnGroupTextBlockVisibility = Visibility.Collapsed;
+        }
+
+        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion
