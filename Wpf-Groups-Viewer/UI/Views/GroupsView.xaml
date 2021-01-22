@@ -13,6 +13,15 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Expander Header="{Binding Name}">
+                        <Expander.ToolTip>
+                            <ToolTip>
+                                <TextBlock>
+                                    <Run Text="{x:Static properties:StringsEN.LocationString}" />
+                                    <Run Text=":" />
+                                    <Run Text="{Binding DetailsFilePath, Mode=OneWay}" />
+                                </TextBlock>
+                            </ToolTip>
+                        </Expander.ToolTip>
                         <Grid>
                             <StackPanel>
                                 <TextBlock>

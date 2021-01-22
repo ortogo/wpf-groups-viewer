@@ -70,6 +70,15 @@ namespace WpfGroupsViewer.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Datails location.
+        /// </summary>
+        public static string LocationString {
+            get {
+                return ResourceManager.GetString("LocationString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number.
         /// </summary>
         public static string NumberString {
