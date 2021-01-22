@@ -3,41 +3,66 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:properties="clr-namespace:WpfGroupsViewer.Properties"
+        xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
+        xmlns:uibehaviors="clr-namespace:WpfGroupsViewer.UI.Behaviours"
         mc:Ignorable="d"
         Title="GroupsView" Height="450" Width="800">
     <Grid>
         <!-- The groups list -->
         <ListBox
             ItemsSource="{Binding GroupsItems}">
+            
+            <!-- Add double click behaviour -->
+            <behaviors:Interaction.Behaviors>
+                <uibehaviors:ExpanderDoubleClickBehaviour />
+            </behaviors:Interaction.Behaviors>
+
+            <!-- Bind command to left double click action -->
+            <ListBox.InputBindings>
+                <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenGroupDetailsCommand}" />
+            </ListBox.InputBindings>
+            
+            <!-- ListBoxItem template -->
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Expander Header="{Binding Name}">
                         <Expander.ToolTip>
                             <ToolTip>
                                 <TextBlock>
-                                    <Run Text="{x:Static properties:StringsEN.LocationString}" />
-                                    <Run Text=":" />
-                                    <Run Text="{Binding DetailsFilePath, Mode=OneWay}" />
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}: {1}">
+                                            <Binding Source="{StaticResource PathToDetailsFileString}" />
+                                            <Binding Path="DetailsFilePath" Mode="OneWay" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
                                 </TextBlock>
                             </ToolTip>
                         </Expander.ToolTip>
                         <Grid>
                             <StackPanel>
                                 <TextBlock>
-                                    <Run Text="{x:Static properties:StringsEN.NumberString}" />
-                                    <Run Text=": " />
-                                    <Run Text="{Binding Number}" />
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}: {1}">
+                                            <Binding Source="{StaticResource NumberString}" />
+                                            <Binding Path="Number" Mode="OneWay" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
                                 </TextBlock>
                                 <TextBlock>
-                                    <Run Text="{x:Static properties:StringsEN.GroupString}" />
-                                    <Run Text=": " />
-                                    <Run Text="{Binding Name}" />
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}: {1}">
+                                            <Binding Source="{StaticResource GroupString}" />
+                                            <Binding Path="Name" Mode="OneWay" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
                                 </TextBlock>
                                 <TextBlock>
-                                    <Run Text="{x:Static properties:StringsEN.PathToDetailsFileString}" />
-                                    <Run Text=": " />
-                                    <Run Text="{Binding DetailsFilePath, Mode=OneWay}" />
+                                    <TextBlock.Text>
+                                        <MultiBinding StringFormat="{}{0}: {1}">
+                                            <Binding Source="{StaticResource PathToDetailsFileString}" />
+                                            <Binding Path="DetailsFilePath" Mode="OneWay" />
+                                        </MultiBinding>
+                                    </TextBlock.Text>
                                 </TextBlock>
                             </StackPanel>
                         </Grid>
