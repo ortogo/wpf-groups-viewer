@@ -5,15 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:behaviors="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:uibehaviors="clr-namespace:WpfGroupsViewer.UI.Behaviours"
+        xmlns:ap="clr-namespace:WpfGroupsViewer.UI.AttachedProperties"
         mc:Ignorable="d"
         Title="GroupsView" Height="450" Width="800">
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+
         <!-- The groups list -->
         <ListBox
+            Margin="10,10,10,0"
+            BorderThickness="0"
             ItemsSource="{Binding GroupsItems}">
-            
-            <!-- Add double click behaviour -->
+
             <behaviors:Interaction.Behaviors>
+                <!-- Add double click behaviour -->
                 <uibehaviors:ExpanderDoubleClickBehaviour />
             </behaviors:Interaction.Behaviors>
 
@@ -21,11 +29,11 @@
             <ListBox.InputBindings>
                 <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding OpenGroupDetailsCommand}" />
             </ListBox.InputBindings>
-            
+
             <!-- ListBoxItem template -->
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Expander Header="{Binding Name}">
+                    <Expander Header="{Binding Name}" >
                         <Expander.ToolTip>
                             <ToolTip>
                                 <TextBlock>
@@ -69,6 +77,29 @@
                     </Expander>
                 </DataTemplate>
             </ListBox.ItemTemplate>
+
+            <ListBox.ItemContainerStyle>
+                <Style>
+                    <!-- Add mouse enter and leave attached properties -->
+                    <Setter Property="ap:MouseEnterCommandAttachedProperty.MouseEnterCommand" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.MouseEnterCommand}" />
+                    <Setter Property="ap:MouseEnterCommandAttachedProperty.MouseEnterCommandParameter" Value="{Binding}" />
+                    <Setter Property="ap:MouseEnterCommandAttachedProperty.MouseLeaveCommand" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.MouseLeaveCommand}" />
+                    <Setter Property="ap:MouseEnterCommandAttachedProperty.MouseLeaveCommandParameter" Value="{Binding}" />
+                </Style>
+            </ListBox.ItemContainerStyle>
         </ListBox>
+
+        <!-- Mouse pointer is on group text block -->
+        <TextBlock 
+            Grid.Row="1"
+            Margin="10"
+            Visibility="{Binding MousePointerIsOnGroupTextBlockVisibility}">
+            <TextBlock.Text>
+                <MultiBinding StringFormat="{}{0}: {1}">
+                    <Binding Source="{StaticResource MousePointerIsOnGroupString}" />
+                    <Binding Path="MousePointerIsOnGroupName" />
+                </MultiBinding>
+            </TextBlock.Text>
+        </TextBlock>
     </Grid>
 </Window>
