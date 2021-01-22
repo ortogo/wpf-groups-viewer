@@ -120,6 +120,9 @@
   <data name="GroupString" xml:space="preserve">
     <value>Group</value>
   </data>
+  <data name="LocationString" xml:space="preserve">
+    <value>Datails location</value>
+  </data>
   <data name="NumberString" xml:space="preserve">
     <value>Number</value>
   </data>
